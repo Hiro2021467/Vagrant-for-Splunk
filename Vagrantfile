@@ -28,7 +28,8 @@ Vagrant.configure("2") do |config|
     splunk.vm.provision "shell", inline: $remove_vmtools
     splunk.vm.provision "shell", inline: $common_provisioning
     splunk.vm.provision "shell", inline: $CentOS9_provisioning
-    # splunk.vm.provision "shell", path: "./setup_splunk.sh"
+    splunk.vm.provision "shell", path: "./setup_splunk.sh"
+    # splunk.vm.provision "shell", path: $start_splunk, run: "always"
   end
 
 end
@@ -67,3 +68,7 @@ $CentOS9_provisioning = <<-'SCRIPT'
 dnf -y update
 reboot
 SCRIPT
+
+# $start_splunk = <<-'SCRIPT'
+# sudo /opt/splunk/bin/splunk start
+# SCRIPT
